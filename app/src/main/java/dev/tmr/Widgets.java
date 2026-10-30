@@ -67,5 +67,6 @@ final class Widgets {
         AppWidgetManager m = AppWidgetManager.getInstance(c);
         for (int w : m.getAppWidgetIds(new ComponentName(c, TimerWidget.class)))
             m.updateAppWidget(w, render(c, w));
+        m.notifyAppWidgetViewDataChanged(m.getAppWidgetIds(new ComponentName(c, ListWidget.class)), R.id.list);
     }
 }

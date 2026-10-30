@@ -28,5 +28,11 @@
             <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE"/></intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/timer_widget"/>
         </receiver>
+        <receiver android:name=".ListWidget" android:label="Timer list" android:exported="true">
+            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE"/></intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/list_widget"/>
+        </receiver>
+        <service android:name=".ListService" android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
     </application>
 </manifest>
