@@ -138,7 +138,7 @@ public class StyleActivity extends Activity {
         if (t != null) { s.name = t.name; s.color = t.color; s.mode = t.mode; s.dur = t.dur; }
         s.id = -1;
         s.start = System.currentTimeMillis() - (long) (prev / 100f * s.dur);
-        View v = Widgets.render(this, wid, cfg, s, true).apply(this, box);
+        View v = Widgets.render(this, wid, cfg, s, true, 120).apply(this, box);
         box.addView(v, new FrameLayout.LayoutParams(dp(120), dp(120), Gravity.CENTER));
     }
 
