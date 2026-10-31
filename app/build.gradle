@@ -2,21 +2,32 @@ plugins { id 'com.android.application' }
 
 android {
     namespace 'dev.tmr'
-    compileSdk 34
+    compileSdk 35
     defaultConfig {
         applicationId 'dev.tmr'
-        minSdk 26
-        targetSdk 34
+        minSdk 26          // notification channels, Chronometer countdown in RemoteViews
+        targetSdk 35
         versionCode 1
-        versionName '0.1'
+        versionName '1'
+    }
+    signingConfigs {
+        release {
+            if (System.getenv('KS_PATH')) {
+                storeFile file(System.getenv('KS_PATH'))
+                storePassword System.getenv('KS_PASS')
+                keyAlias System.getenv('KS_ALIAS')
+                keyPassword System.getenv('KS_PASS')
+            }
+        }
     }
     buildTypes {
         release {
             minifyEnabled true
-            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
-            signingConfig signingConfigs.debug
+            vcsInfo.include = false // no git info in the APK, keeps builds reproducible
+            if (System.getenv('KS_PATH')) signingConfig signingConfigs.release
         }
     }
-    lint { checkReleaseBuilds false }
+    dependenciesInfo { includeInApk = false; includeInBundle = false } // no signing blob, reproducible
+    lint { checkReleaseBuilds = false; abortOnError = false }
 }
