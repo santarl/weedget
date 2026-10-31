@@ -1,4 +1,4 @@
-package dev.tmr;
+package io.rfsj.tmr;
 
 import android.animation.ValueAnimator;
 import android.content.Context;

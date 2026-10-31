@@ -1,4 +1,4 @@
-package dev.tmr;
+package io.rfsj.tmr;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;

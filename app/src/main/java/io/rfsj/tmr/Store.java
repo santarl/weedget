@@ -1,4 +1,4 @@
-package dev.tmr;
+package io.rfsj.tmr;
 
 import android.content.Context;
 import android.content.SharedPreferences;

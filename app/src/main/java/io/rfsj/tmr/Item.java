@@ -1,4 +1,4 @@
-package dev.tmr;
+package io.rfsj.tmr;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,4 +1,4 @@
-package dev.tmr;
+package io.rfsj.tmr;
 
 import android.app.Activity;
 import android.graphics.drawable.GradientDrawable;
