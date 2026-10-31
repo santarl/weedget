@@ -65,6 +65,10 @@ public class MainActivity extends Activity {
                     Cfg.STYLES));
             styleSp.setSelection(Store.cfg(this, wid).style);
             root.addView(styleSp);
+            Button look = new Button(this);
+            look.setText("Customize look...");
+            look.setOnClickListener(v -> startActivity(new Intent(this, StyleActivity.class).putExtra("wid", wid)));
+            root.addView(look);
         }
         list = new LinearLayout(this);
         list.setOrientation(LinearLayout.VERTICAL);
@@ -75,7 +79,11 @@ public class MainActivity extends Activity {
         root.addView(add);
     }
 
-    @Override protected void onResume() { super.onResume(); build(); }
+    @Override protected void onResume() {
+        super.onResume();
+        if (styleSp != null) styleSp.setSelection(Store.cfg(this, wid).style); // may have changed in StyleActivity
+        build();
+    }
 
     void build() {
         list.removeAllViews();

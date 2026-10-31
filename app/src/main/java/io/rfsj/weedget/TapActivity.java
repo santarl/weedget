@@ -1,6 +1,8 @@
 package io.rfsj.weedget;
 
 import android.app.Activity;
+import android.appwidget.AppWidgetManager;
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -49,6 +51,27 @@ public class TapActivity extends Activity {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(-1, -2);
         lp.topMargin = (int) (16 * d);
         card.addView(sv, lp);
+
+        final int wid = getIntent().getIntExtra("wid", AppWidgetManager.INVALID_APPWIDGET_ID);
+        if (wid != AppWidgetManager.INVALID_APPWIDGET_ID) {
+            TextView look = new TextView(this);
+            look.setText("Customize look");
+            look.setTextColor(0xFFFFFFFF);
+            look.setGravity(Gravity.CENTER);
+            look.setPadding(0, (int) (14 * d), 0, (int) (14 * d));
+            GradientDrawable lg = new GradientDrawable();
+            lg.setColor(0x22FFFFFF);
+            lg.setCornerRadius(28 * d);
+            look.setBackground(lg);
+            look.setOnClickListener(v -> {
+                startActivity(new Intent(this, StyleActivity.class).putExtra("wid", wid)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
+            });
+            LinearLayout.LayoutParams ll = new LinearLayout.LayoutParams(-1, -2);
+            ll.topMargin = (int) (12 * d);
+            card.addView(look, ll);
+        }
 
         FrameLayout.LayoutParams fp = new FrameLayout.LayoutParams(-1, -2, Gravity.CENTER);
         int m = (int) (24 * d);

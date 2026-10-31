@@ -15,6 +15,7 @@
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
             </intent-filter>
         </activity>
+        <activity android:name=".StyleActivity" android:exported="false"/>
         <activity android:name=".TapActivity" android:exported="false"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:excludeFromRecents="true" android:taskAffinity=""/>
