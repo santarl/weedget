@@ -5,10 +5,10 @@
         android:layout_height="match_parent" android:scaleType="fitCenter"/>
     <Chronometer android:id="@+id/chr" android:layout_width="match_parent"
         android:layout_height="match_parent" android:gravity="center" android:padding="12dp"
-        android:textColor="#FFFFFF" android:textStyle="bold" android:autoSizeTextType="uniform"
+        android:textColor="#FFFFFF" android:textStyle="bold" android:singleLine="true" android:autoSizeTextType="uniform"
         android:autoSizeMinTextSize="7sp" android:autoSizeMaxTextSize="18sp"/>
     <TextView android:id="@+id/txt" android:layout_width="match_parent"
         android:layout_height="match_parent" android:gravity="center" android:padding="12dp"
-        android:textColor="#FFFFFF" android:textStyle="bold" android:autoSizeTextType="uniform"
+        android:textColor="#FFFFFF" android:textStyle="bold" android:singleLine="true" android:autoSizeTextType="uniform"
         android:autoSizeMinTextSize="7sp" android:autoSizeMaxTextSize="18sp"/>
 </FrameLayout>
