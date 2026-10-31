@@ -31,7 +31,7 @@ final class SlideView extends View {
         p.setAlpha((int) (255 * (1 - Math.min(1, x / max))));
         p.setTextAlign(Paint.Align.CENTER);
         p.setTextSize(15 * d);
-        c.drawText("Slide to reset", w / 2 + r / 2, h / 2 + 5 * d, p);
+        c.drawText("Slide to restart", w / 2 + r / 2, h / 2 + 5 * d, p);
         p.setColor(0xFFFFFFFF);
         c.drawCircle(x + r, r, r - 4 * d, p);
     }

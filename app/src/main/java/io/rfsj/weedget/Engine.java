@@ -43,6 +43,17 @@ final class Engine {
         schedule(c); Widgets.refresh(c);
     }
 
+    /** Reset and start again right away, so the widget needs no extra tap. */
+    static void restart(Context c, int id) {
+        Item it = Store.get(c, id);
+        if (it == null) return;
+        it.start = System.currentTimeMillis();
+        it.alerted = false;
+        Store.put(c, it);
+        c.getSystemService(NotificationManager.class).cancel(id);
+        schedule(c); Widgets.refresh(c);
+    }
+
     static void done(Context c, int id) {
         Item it = Store.get(c, id);
         long now = System.currentTimeMillis();

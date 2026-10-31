@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
         root.addView(h);
         if (wid == AppWidgetManager.INVALID_APPWIDGET_ID) {
             TextView hint = new TextView(this);
-            hint.setText("Tap = edit, long-press = start / reset");
+            hint.setText("Tap = edit, long-press = start / restart");
             hint.setPadding(0, 0, 0, p);
             root.addView(hint);
         } else {
