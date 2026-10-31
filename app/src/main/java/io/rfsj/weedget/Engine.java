@@ -19,9 +19,9 @@ final class Engine {
                 new Intent(c, Receiver.class).setAction(a).putExtra("id", id), FI);
     }
 
-    static PendingIntent tap(Context c, int id) {
-        return PendingIntent.getActivity(c, id, new Intent(c, TapActivity.class)
-                .putExtra("id", id).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), FI);
+    static PendingIntent tap(Context c, int id, int wid) {
+        return PendingIntent.getActivity(c, wid, new Intent(c, TapActivity.class)
+                .putExtra("id", id).putExtra("wid", wid).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), FI);
     }
 
     // ---- actions ----

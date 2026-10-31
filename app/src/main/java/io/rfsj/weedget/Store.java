@@ -50,8 +50,11 @@ final class Store {
         return n;
     }
 
-    static void bind(Context c, int w, int t, int s) { p(c).edit().putInt("t" + w, t).putInt("s" + w, s).apply(); }
-    static void unbind(Context c, int w) { p(c).edit().remove("t" + w).remove("s" + w).apply(); }
+    static void bind(Context c, int w, int t) { p(c).edit().putInt("t" + w, t).apply(); }
+    static void unbind(Context c, int w) { p(c).edit().remove("t" + w).remove("s" + w).remove("c" + w).apply(); }
     static int tid(Context c, int w) { return p(c).getInt("t" + w, 0); }
-    static int style(Context c, int w) { return p(c).getInt("s" + w, 0); }
+
+    /** Look of one widget; "s<id>" is the pre-Cfg style int. */
+    static Cfg cfg(Context c, int w) { return Cfg.from(p(c).getString("c" + w, null), p(c).getInt("s" + w, 0)); }
+    static void putCfg(Context c, int w, Cfg k) { p(c).edit().putString("c" + w, k.json()).apply(); }
 }

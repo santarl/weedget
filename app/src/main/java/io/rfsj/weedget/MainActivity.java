@@ -62,8 +62,8 @@ public class MainActivity extends Activity {
         } else {
             styleSp = new Spinner(this);
             styleSp.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,
-                    new String[]{"Ring", "Pie", "Vertical bar", "Fill"}));
-            styleSp.setSelection(Store.style(this, wid));
+                    Cfg.STYLES));
+            styleSp.setSelection(Store.cfg(this, wid).style);
             root.addView(styleSp);
         }
         list = new LinearLayout(this);
@@ -104,7 +104,10 @@ public class MainActivity extends Activity {
     }
 
     void pick(Item t) {
-        Store.bind(this, wid, t.id, styleSp.getSelectedItemPosition());
+        Cfg k = Store.cfg(this, wid);
+        k.style = styleSp.getSelectedItemPosition();
+        Store.putCfg(this, wid, k);
+        Store.bind(this, wid, t.id);
         AppWidgetManager.getInstance(this).updateAppWidget(wid, Widgets.render(this, wid));
         Engine.schedule(this);
         setResult(RESULT_OK, new Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, wid));

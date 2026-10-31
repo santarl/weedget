@@ -6,6 +6,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -41,15 +42,24 @@ final class Widgets {
     }
 
     static RemoteViews render(Context c, int wid) {
-        Item it = Store.get(c, Store.tid(c, wid));
-        int style = Store.style(c, wid);
-        RemoteViews v = new RemoteViews(c.getPackageName(), style == 2 ? R.layout.w_side : R.layout.w_center);
+        return render(c, wid, Store.cfg(c, wid), Store.get(c, Store.tid(c, wid)), false);
+    }
+
+    /** preview = for the look editor: no click handlers. */
+    static RemoteViews render(Context c, int wid, Cfg k, Item it, boolean preview) {
+        int layout = k.style == Cfg.VBAR ? R.layout.w_side : k.style == Cfg.HBAR ? R.layout.w_top : R.layout.w_center;
+        RemoteViews v = new RemoteViews(c.getPackageName(), layout);
+        int tc = k.argb(Cfg.TXT, 0);
+        for (int id : new int[]{R.id.chr, R.id.txt}) {
+            v.setTextColor(id, tc);
+            if (k.tsize > 0) v.setTextViewTextSize(id, TypedValue.COMPLEX_UNIT_SP, Math.max(6, k.tsize));
+        }
         if (it == null) {
-            v.setImageViewBitmap(R.id.img, Painter.draw(style, 0, IDLE_COL));
+            v.setImageViewBitmap(R.id.img, Painter.draw(k, 0, IDLE_COL));
             v.setViewVisibility(R.id.chr, View.GONE);
             v.setViewVisibility(R.id.txt, View.VISIBLE);
             v.setTextViewText(R.id.txt, "?");
-            v.setOnClickPendingIntent(R.id.root, PendingIntent.getActivity(c, wid,
+            if (!preview) v.setOnClickPendingIntent(R.id.root, PendingIntent.getActivity(c, wid,
                     new Intent(c, MainActivity.class)
                             .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, wid)
                             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), Engine.FI));
@@ -57,10 +67,15 @@ final class Widgets {
         }
         long now = System.currentTimeMillis();
         int st = it.state(now);
-        v.setImageViewBitmap(R.id.img, Painter.draw(style, st == Item.DONE ? 1 : prog(it, now), col(it, st)));
+        v.setImageViewBitmap(R.id.img, Painter.draw(k, st == Item.DONE ? 1 : prog(it, now), col(it, st)));
         time(v, it, now);
-        v.setOnClickPendingIntent(R.id.root, st == Item.IDLE ? Engine.bc(c, "START", it.id) : Engine.tap(c, it.id));
+        if (!preview) v.setOnClickPendingIntent(R.id.root,
+                st == Item.IDLE ? Engine.bc(c, "START", it.id) : Engine.tap(c, it.id, wid));
         return v;
+    }
+
+    static void update(Context c, int wid) {
+        AppWidgetManager.getInstance(c).updateAppWidget(wid, render(c, wid));
     }
 
     static void refresh(Context c) {
