@@ -43,6 +43,12 @@ public class MainActivity extends Activity {
         root.setPadding(p, p, p, p);
         sv.addView(root);
         setContentView(sv);
+        // targetSdk 35 draws edge to edge: keep the content clear of the system bars
+        sv.setOnApplyWindowInsetsListener((v, i) -> {
+            v.setPadding(i.getSystemWindowInsetLeft(), i.getSystemWindowInsetTop(),
+                    i.getSystemWindowInsetRight(), i.getSystemWindowInsetBottom());
+            return i;
+        });
 
         TextView h = new TextView(this);
         h.setText(wid != AppWidgetManager.INVALID_APPWIDGET_ID ? "Pick a timer for this widget" : "Timers");
