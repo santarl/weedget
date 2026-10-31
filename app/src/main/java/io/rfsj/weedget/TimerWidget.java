@@ -1,4 +1,4 @@
-package io.rfsj.tmr;
+package io.rfsj.weedget;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;

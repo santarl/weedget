@@ -1,6 +1,6 @@
 > **AI assistance:** this project is written with the help of Claude (Anthropic). Commits carry a `Co-Authored-By` trailer.
 
-# tmr
+# weedget
 
 Tiny Android timer widgets.
 

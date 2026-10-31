@@ -16,7 +16,7 @@ jobs:
         run: |
           # own app id => installs next to the real app; run number => each test build updates the last
           sed -i -E "s/versionCode [0-9]+/versionCode ${{ github.run_number }}/; s/applicationId '([^']*)'/applicationId '\\1.test'/" app/build.gradle
-          sed -i 's/android:label="tmr"/android:label="tmr test"/' app/src/main/AndroidManifest.xml
+          sed -i 's/android:label="weedget"/android:label="weedget test"/' app/src/main/AndroidManifest.xml
       - name: Build signed APK
         env:
           KS_PATH: ${{ runner.temp }}/release.jks
@@ -30,5 +30,5 @@ jobs:
           ls -l "$APK"
       - uses: actions/upload-artifact@v4
         with:
-          name: tmr-test-${{ github.run_number }}
+          name: weedget-test-${{ github.run_number }}
           path: app/build/outputs/apk/release/app-release.apk

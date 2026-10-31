@@ -1,4 +1,4 @@
-package io.rfsj.tmr;
+package io.rfsj.weedget;
 
 import android.content.Context;
 import android.content.SharedPreferences;

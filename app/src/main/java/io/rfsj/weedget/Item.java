@@ -1,4 +1,4 @@
-package io.rfsj.tmr;
+package io.rfsj.weedget;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -3,5 +3,5 @@
     android:minWidth="40dp" android:minHeight="40dp"
     android:targetCellWidth="1" android:targetCellHeight="1"
     android:updatePeriodMillis="0" android:initialLayout="@layout/w_center"
-    android:configure="io.rfsj.tmr.MainActivity" android:resizeMode="horizontal|vertical"
+    android:configure="io.rfsj.weedget.MainActivity" android:resizeMode="horizontal|vertical"
     android:widgetFeatures="reconfigurable"/>

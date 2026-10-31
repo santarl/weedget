@@ -1,4 +1,4 @@
-package io.rfsj.tmr;
+package io.rfsj.weedget;
 
 import android.animation.ValueAnimator;
 import android.content.Context;

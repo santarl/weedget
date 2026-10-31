@@ -42,8 +42,8 @@ jobs:
         run: |
           APK=app/build/outputs/apk/release/app-release.apk
           $ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools | sort -V | tail -1)/apksigner verify --verbose "$APK"
-          cp "$APK" tmr-v${{ steps.v.outputs.n }}.apk
-          ls -l tmr-v${{ steps.v.outputs.n }}.apk
+          cp "$APK" weedget-v${{ steps.v.outputs.n }}.apk
+          ls -l weedget-v${{ steps.v.outputs.n }}.apk
 
       # Push only the tag (not the branch): main history stays clean, the tag
       # still points at a commit with the right versionCode. Pushed after a
@@ -52,4 +52,4 @@ jobs:
         run: git push origin "v${{ steps.v.outputs.n }}"
       - name: Publish release
         env: { GH_TOKEN: '${{ github.token }}' }
-        run: gh release create "v${{ steps.v.outputs.n }}" "tmr-v${{ steps.v.outputs.n }}.apk" --title "v${{ steps.v.outputs.n }}" --generate-notes
+        run: gh release create "v${{ steps.v.outputs.n }}" "weedget-v${{ steps.v.outputs.n }}.apk" --title "v${{ steps.v.outputs.n }}" --generate-notes
